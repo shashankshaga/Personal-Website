@@ -2,26 +2,26 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 
 const experiences = [
   {
-    role: 'Senior Frontend Developer',
-    company: 'TechCorp Inc.',
-    period: '2023 – Present',
+    role: 'Machine Learning Engineer',
+    company: 'Gator AI',
+    period: '2026 – Present',
     description:
       'Led the frontend team building a SaaS analytics platform serving 10k+ users. Improved performance by 40% through code splitting and lazy loading. Mentored 3 junior developers.',
     tags: ['React', 'TypeScript', 'GraphQL', 'AWS', 'Cypress'],
     current: true,
   },
   {
-    role: 'Full Stack Developer',
-    company: 'StartupXYZ',
-    period: '2022 – 2023',
+    role: 'Software Programmer',
+    company: 'Machine Intelligence Labaratory',
+    period: '2025 – 2026',
     description:
       'Built and shipped 5 full-stack features in 3 months. Integrated Stripe payments, designed RESTful APIs, maintained PostgreSQL databases, and reduced API response times by 35%.',
     tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Stripe', 'Redis'],
     current: false,
   },
   {
-    role: 'Frontend Developer',
-    company: 'Digital Agency',
+    role: 'Full-stack Developer',
+    company: 'Sase WebDev Team',
     period: '2021 – 2022',
     description:
       'Developed responsive websites for 15+ clients across e-commerce, fintech, and healthcare sectors. Specialized in React, performance optimization, and accessibility.',
@@ -29,8 +29,8 @@ const experiences = [
     current: false,
   },
   {
-    role: 'Junior Web Developer',
-    company: 'Freelance',
+    role: 'Web Developer',
+    company: 'Open Source Club',
     period: '2020 – 2021',
     description:
       'Worked with local businesses to build and launch web presence. First exposure to full-stack development and client communication.',
@@ -58,17 +58,15 @@ export default function Experience() {
             {experiences.map((exp, i) => (
               <div
                 key={i}
-                className={`relative pl-12 md:pl-20 transition-all duration-700 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
+                className={`relative pl-12 md:pl-20 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+                  }`}
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
                 {/* Timeline dot */}
-                <div className={`absolute left-0 md:left-2 top-5 w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 ${
-                  exp.current
+                <div className={`absolute left-0 md:left-2 top-5 w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-300 ${exp.current
                     ? 'bg-orange-500 border-orange-400 glow-orange'
                     : 'bg-neutral-900 border-white/10'
-                }`}>
+                  }`}>
                   {exp.current ? (
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -78,9 +76,8 @@ export default function Experience() {
                   )}
                 </div>
 
-                <div className={`p-5 md:p-6 rounded-2xl glass border transition-all duration-300 hover:border-orange-500/20 ${
-                  exp.current ? 'border-orange-500/20' : 'border-white/5'
-                }`}>
+                <div className={`p-5 md:p-6 rounded-2xl glass border transition-all duration-300 hover:border-orange-500/20 ${exp.current ? 'border-orange-500/20' : 'border-white/5'
+                  }`}>
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                     <div>
                       <h3 className="text-lg font-bold">{exp.role}</h3>

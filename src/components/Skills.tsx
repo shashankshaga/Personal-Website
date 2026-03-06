@@ -1,43 +1,5 @@
+import { useState, useEffect, useRef } from 'react'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
-
-const categories = [
-  {
-    title: 'Frontend',
-    icon: '🎨',
-    color: 'from-orange-500 to-red-500',
-    skills: [
-      { name: 'React', level: 92 },
-      { name: 'TypeScript', level: 88 },
-      { name: 'Next.js', level: 85 },
-      { name: 'Tailwind CSS', level: 95 },
-      { name: 'Three.js / WebGL', level: 68 },
-    ],
-  },
-  {
-    title: 'Backend',
-    icon: '⚙️',
-    color: 'from-blue-500 to-cyan-500',
-    skills: [
-      { name: 'Node.js', level: 85 },
-      { name: 'Express / Fastify', level: 82 },
-      { name: 'PostgreSQL', level: 80 },
-      { name: 'MongoDB', level: 78 },
-      { name: 'GraphQL', level: 74 },
-    ],
-  },
-  {
-    title: 'DevOps & Tools',
-    icon: '🛠️',
-    color: 'from-purple-500 to-pink-500',
-    skills: [
-      { name: 'Git & GitHub', level: 92 },
-      { name: 'Docker', level: 75 },
-      { name: 'AWS / Cloud', level: 68 },
-      { name: 'CI/CD Pipelines', level: 72 },
-      { name: 'Linux / Shell', level: 80 },
-    ],
-  },
-]
 
 const techBadges = [
   { name: 'React', icon: '⚛️' },
@@ -58,8 +20,59 @@ const techBadges = [
   { name: 'Jest', icon: '🃏' },
 ]
 
+// Stable float params per bubble (varying duration & delay)
+const floatParams = techBadges.map((_, i) => ({
+  duration: 2.4 + (i * 0.37) % 1.6,
+  delay: (i * 0.45) % 2.8,
+}))
+
+type Pos = { x: number; y: number }
+
 export default function Skills() {
   const { ref, isVisible } = useIntersectionObserver(0.1)
+  const [positions, setPositions] = useState<Pos[]>(() => techBadges.map(() => ({ x: 0, y: 0 })))
+  const [draggingIdx, setDraggingIdx] = useState<number | null>(null)
+  const dragData = useRef<{
+    idx: number
+    startX: number
+    startY: number
+    origX: number
+    origY: number
+  } | null>(null)
+
+  const handleMouseDown = (e: React.MouseEvent, idx: number) => {
+    e.preventDefault()
+    dragData.current = {
+      idx,
+      startX: e.clientX,
+      startY: e.clientY,
+      origX: positions[idx].x,
+      origY: positions[idx].y,
+    }
+    setDraggingIdx(idx)
+  }
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!dragData.current) return
+      const { idx, startX, startY, origX, origY } = dragData.current
+      setPositions(prev => {
+        const next = [...prev]
+        next[idx] = { x: origX + e.clientX - startX, y: origY + e.clientY - startY }
+        return next
+      })
+    }
+    const onUp = () => {
+      dragData.current = null
+      setDraggingIdx(null)
+    }
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('mouseup', onUp)
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mouseup', onUp)
+    }
+  }, [])
 
   return (
     <section id="skills" ref={ref} className="py-32 px-6">
@@ -69,60 +82,39 @@ export default function Skills() {
           <h2 className="text-4xl md:text-5xl font-black">What I Work With</h2>
         </div>
 
-        {/* Skill cards with progress bars */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          {categories.map((cat, ci) => (
+        <p className={`text-center text-neutral-600 text-xs font-mono-code tracking-widest mb-12 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          // TECH STACK — grab & drag the bubbles
+        </p>
+
+        <div className={`flex flex-wrap justify-center gap-5 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          {techBadges.map((tech, i) => (
             <div
-              key={ci}
-              className={`p-6 rounded-2xl glass border border-white/5 hover:border-orange-500/20 transition-all duration-700 hover:-translate-y-1 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${ci * 120}ms` }}
+              key={i}
+              style={{
+                animation: draggingIdx === i
+                  ? 'none'
+                  : `bubble-float ${floatParams[i].duration}s ease-in-out infinite`,
+                animationDelay: `${floatParams[i].delay}s`,
+                display: 'inline-block',
+              }}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cat.color} flex items-center justify-center text-lg`}>
-                  {cat.icon}
-                </div>
-                <h3 className="text-lg font-bold">{cat.title}</h3>
-              </div>
-              <div className="space-y-4">
-                {cat.skills.map((skill, si) => (
-                  <div key={si}>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <span className="text-sm text-neutral-300">{skill.name}</span>
-                      <span className="text-xs text-orange-400 font-mono-code font-medium">{skill.level}%</span>
-                    </div>
-                    <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-orange-600 to-orange-400 transition-all duration-1000 ease-out"
-                        style={{
-                          width: isVisible ? `${skill.level}%` : '0%',
-                          transitionDelay: `${ci * 120 + si * 80 + 400}ms`,
-                          boxShadow: '0 0 8px rgba(249,115,22,0.4)',
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
+              <div
+                onMouseDown={e => handleMouseDown(e, i)}
+                style={{
+                  transform: `translate(${positions[i].x}px, ${positions[i].y}px)`,
+                  cursor: draggingIdx === i ? 'grabbing' : 'grab',
+                  userSelect: 'none',
+                  zIndex: draggingIdx === i ? 50 : 'auto',
+                  position: 'relative',
+                  transition: draggingIdx === i ? 'none' : 'box-shadow 0.2s ease, border-color 0.2s ease',
+                }}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl glass border border-white/10 text-sm text-neutral-300 hover:text-orange-400 hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/20 select-none"
+              >
+                <span className="text-lg">{tech.icon}</span>
+                <span className="font-medium">{tech.name}</span>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Tech badge cloud */}
-        <div className={`transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-center text-neutral-600 text-xs font-mono-code tracking-widest mb-6">// FULL TECH STACK</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {techBadges.map((tech, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border border-white/5 text-sm text-neutral-400 hover:text-orange-400 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-500/10"
-              >
-                <span>{tech.icon}</span>
-                <span>{tech.name}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

@@ -3,42 +3,38 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 
 const projects = [
   {
-    title: 'DevFlow',
-    description: 'Full-stack project management tool built for developers. Real-time collaboration, Kanban boards, GitHub integration, and team analytics.',
-    tags: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'WebSockets'],
+    title: 'Quantara',
+    description: 'I developed a tariff prediction model using sentiment analysis and federal sources, achieving 75% accuracy.',
+    tags: ['Python', 'Scikit-learn', 'NLTK', 'Pandas', 'Matplotlib'],
     github: 'https://github.com',
     live: 'https://example.com',
-    icon: '🚀',
     accentColor: 'orange',
     featured: true,
   },
   {
-    title: 'AuraUI',
-    description: 'Open-source React component library with 50+ accessible, customizable components. Dark mode, full TypeScript support, comprehensive docs.',
-    tags: ['React', 'TypeScript', 'Storybook', 'Tailwind'],
+    title: 'Chaos Wall',
+    description: 'I developed a prediction model using linear regression to forecast the motion of a double pendulum, accurately capturing its dynamic behavior',
+    tags: ['Python', 'Scikit-learn', 'NLTK', 'Pandas', 'Matplotlib'],
     github: 'https://github.com',
     live: 'https://example.com',
-    icon: '🎨',
     accentColor: 'blue',
     featured: true,
   },
   {
-    title: 'NeuralChat',
-    description: 'AI-powered chat app with streaming responses, conversation history, multiple model support, and a beautiful markdown renderer.',
+    title: 'Clario - Teachers Platform',
+    description: 'A student-built platform that empowers teachers to plan courses, generate worksheets, and track student progress with clear analytics, all in one simple, time-saving hub for our teachers.',
     tags: ['Next.js', 'OpenAI', 'Vercel AI SDK', 'MongoDB'],
-    github: 'https://github.com',
+    github: 'https://github.com/ragult419-cell/Swamphacks',
     live: 'https://example.com',
-    icon: '🤖',
     accentColor: 'green',
     featured: true,
   },
   {
-    title: 'CryptoTracker',
-    description: 'Real-time cryptocurrency dashboard with portfolio tracking, price alerts, and interactive historical charts.',
-    tags: ['React', 'Chart.js', 'WebSockets', 'CoinGecko API'],
+    title: 'Echo Speech Assistant',
+    description: 'I built a career assistant system that tracks conversations with recruiters and provides insights, built as a full-stack application.',
+    tags: ['React Native', 'Expo', 'TypeScript', 'OpenAI Whisper API', 'MongoDB'],
     github: 'https://github.com',
     live: 'https://example.com',
-    icon: '📈',
     accentColor: 'yellow',
     featured: false,
   },
@@ -48,17 +44,15 @@ const projects = [
     tags: ['Next.js', 'Prisma', 'PostgreSQL', 'Vercel'],
     github: 'https://github.com',
     live: 'https://example.com',
-    icon: '🔗',
     accentColor: 'pink',
     featured: false,
   },
   {
-    title: 'CLI Toolkit',
+    title: 'Subjugator',
     description: 'Productivity CLI tools for developers — smart file organizer, git workflow helper, env manager, and project scaffolder.',
     tags: ['Node.js', 'Commander.js', 'TypeScript', 'npm'],
-    github: 'https://github.com',
+    github: 'https://github.com/uf-mil/subjugator.org',
     live: 'https://example.com',
-    icon: '⚡',
     accentColor: 'purple',
     featured: false,
   },
@@ -102,13 +96,12 @@ export default function Projects() {
             <button
               key={tab}
               onClick={() => setFilter(tab)}
-              className={`px-5 py-2 rounded-lg text-sm font-medium capitalize transition-all duration-200 ${
-                filter === tab
-                  ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20'
-                  : 'glass border border-white/5 text-neutral-400 hover:text-white hover:border-white/10'
-              }`}
+              className={`px-5 py-2 rounded-lg text-sm font-medium capitalize transition-all duration-200 ${filter === tab
+                ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20'
+                : 'glass border border-white/5 text-neutral-400 hover:text-white hover:border-white/10'
+                }`}
             >
-              {tab === 'all' ? 'All Projects' : 'Featured'}
+              {tab === 'all' ? 'All Projects' : 'AI Projects'}
             </button>
           ))}
         </div>
@@ -117,9 +110,8 @@ export default function Projects() {
           {visible.map((project, i) => (
             <div
               key={project.title}
-              className={`group relative p-6 rounded-2xl glass border border-white/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${accentMap[project.accentColor]} ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
+              className={`group relative p-6 rounded-2xl glass border border-white/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${accentMap[project.accentColor]} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
               style={{ transitionDelay: `${i * 80}ms` }}
             >
               {/* Accent gradient on hover */}
@@ -172,7 +164,7 @@ export default function Projects() {
 
         <div className={`text-center mt-12 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <a
-            href="https://github.com"
+            href="https://github.com/shashankshaga"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 border border-white/10 hover:border-orange-500/30 rounded-xl text-neutral-400 hover:text-orange-400 transition-all duration-300 hover:-translate-y-0.5"

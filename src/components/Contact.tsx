@@ -1,14 +1,4 @@
-import { useState } from 'react'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
-
-interface FormState {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
-
-type Status = 'idle' | 'sending' | 'sent' | 'error'
 
 const contactInfo = [
   {
@@ -29,7 +19,7 @@ const contactInfo = [
     ),
     label: 'GitHub',
     value: 'github.com/shashankshaga',
-    href: 'https://github.com',
+    href: 'https://github.com/shashankshaga',
   },
   {
     icon: (
@@ -39,36 +29,22 @@ const contactInfo = [
     ),
     label: 'LinkedIn',
     value: 'linkedin.com/in/shashankshaga',
-    href: 'https://linkedin.com',
+    href: 'https://linkedin.com/in/shashankshaga',
   },
 ]
 
+// Replace this with your actual Calendly / Cal.com link
+const SCHEDULE_URL = 'https://calendly.com/shashankshaga'
+
 export default function Contact() {
   const { ref, isVisible } = useIntersectionObserver(0.1)
-  const [form, setForm] = useState<FormState>({ name: '', email: '', subject: '', message: '' })
-  const [status, setStatus] = useState<Status>('idle')
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('sending')
-    await new Promise(r => setTimeout(r, 1800))
-    setStatus('sent')
-    setForm({ name: '', email: '', subject: '', message: '' })
-    setTimeout(() => setStatus('idle'), 4000)
-  }
-
-
 
   return (
     <section id="contact" ref={ref} className="py-32 px-6">
       <div className="max-w-6xl mx-auto">
         <div className={`mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-orange-500 font-mono-code text-sm mb-2 tracking-wider">// 05. contact</p>
-          <h2 className="text-4xl md:text-5xl font-black">Get In Touch</h2>
+          <h2 className="text-4xl md:text-5xl font-black">Let's Grab Coffee</h2>
         </div>
 
         {/* The Coding Workspace */}
@@ -84,7 +60,7 @@ export default function Contact() {
               <div className="flex gap-1 bg-[#1a1d27] rounded-md p-1">
                 <div className="px-3 py-1 bg-[#282c34] rounded text-xs text-orange-400 font-mono-code flex items-center gap-2">
                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>
-                  Contact.ts
+                  CoffeeChat.ts
                 </div>
                 <div className="px-3 py-1 rounded text-xs text-neutral-500 font-mono-code hover:text-neutral-300 transition-colors cursor-pointer flex items-center gap-2">
                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4V4z" /></svg>
@@ -100,176 +76,127 @@ export default function Contact() {
           </div>
 
           <div className="flex flex-col lg:flex-row">
-            {/* Left Panel: The Code Form */}
+            {/* Left Panel: Coffee Chat Code */}
             <div className="flex-1 p-4 sm:p-6 md:p-8 font-mono-code text-sm sm:text-base border-b lg:border-b-0 lg:border-r border-white/5 bg-[#0d1117]/50 relative">
               <div className="absolute top-0 left-0 bottom-0 w-12 bg-[#0d1117] border-r border-white/5 z-0"></div>
 
-              <form onSubmit={handleSubmit} className="relative z-10 w-full overflow-hidden">
-                <div className="flex text-neutral-500 mb-6 group/line">
-                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none group-hover/line:text-neutral-500 transition-colors">1</span>
-                  <span className="break-words w-full"><span className="text-purple-400">import</span> {'{'} <span className="text-blue-300">ContactSystem</span> {'}'} <span className="text-purple-400">from</span> <span className="text-green-400">'@shashank/api'</span>;</span>
+              <div className="relative z-10">
+                {/* Line 1 */}
+                <div className="flex text-neutral-500 mb-6">
+                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">1</span>
+                  <span className="break-words">
+                    <span className="text-purple-400">import</span>{' '}
+                    {'{ '}<span className="text-blue-300">Calendar</span>{' }'}{' '}
+                    <span className="text-purple-400">from</span>{' '}
+                    <span className="text-green-400">'@shashank/meet'</span>;
+                  </span>
                 </div>
 
-                <div className="flex text-neutral-500 mb-2 group/line">
-                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none group-hover/line:text-neutral-500 transition-colors">2</span>
-                  <span className="break-words w-full"><span className="text-purple-400">const</span> <span className="text-blue-400">messagePayload</span> <span className="text-white">=</span> {'{'}</span>
+                {/* Line 2 blank */}
+                <div className="flex mb-2">
+                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">2</span>
                 </div>
 
-                {/* Name Input */}
-                <div className="flex text-neutral-500 mb-2 group/line">
-                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none pt-1 group-hover/line:text-neutral-500 transition-colors">3</span>
-                  <div className="flex-1 flex flex-wrap items-center ml-4 sm:ml-8 gap-1">
-                    <span className="text-blue-300">name</span><span className="text-white">:</span> <span className="text-green-400 ml-1 sm:ml-2">"</span>
-                    <input
-                      type="text"
-                      name="name"
-                      value={form.name}
-                      onChange={handleChange}
-                      className="bg-transparent border-b border-dashed border-white/20 focus:border-orange-500/60 focus:bg-white/5 focus:outline-none text-green-300 w-full max-w-[12rem] sm:max-w-xs transition-all px-1 placeholder-green-400/20"
-                      placeholder="John Doe"
-                      required
-                    />
-                    <span className="text-green-400">"</span><span className="text-white">,</span>
-                  </div>
+                {/* Line 3 */}
+                <div className="flex text-neutral-500 mb-2">
+                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">3</span>
+                  <span>
+                    <span className="text-purple-400">const</span>{' '}
+                    <span className="text-blue-400">coffeeChat</span>{' '}
+                    <span className="text-white">=</span>{' '}
+                    <span className="text-white">{'{'}</span>
+                  </span>
                 </div>
 
-                {/* Email Input */}
-                <div className="flex text-neutral-500 mb-2 group/line">
-                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none pt-1 group-hover/line:text-neutral-500 transition-colors">4</span>
-                  <div className="flex-1 flex flex-wrap items-center ml-4 sm:ml-8 gap-1">
-                    <span className="text-blue-300">email</span><span className="text-white">:</span> <span className="text-green-400 ml-1 sm:ml-2">"</span>
-                    <input
-                      type="email"
-                      name="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      className="bg-transparent border-b border-dashed border-white/20 focus:border-orange-500/60 focus:bg-white/5 focus:outline-none text-green-300 w-full max-w-[14rem] sm:max-w-sm transition-all px-1 placeholder-green-400/20"
-                      placeholder="hello@example.com"
-                      required
-                    />
-                    <span className="text-green-400">"</span><span className="text-white">,</span>
-                  </div>
+                {/* Line 4 */}
+                <div className="flex text-neutral-500 mb-2">
+                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">4</span>
+                  <span className="ml-4 sm:ml-8">
+                    <span className="text-blue-300">duration</span>
+                    <span className="text-white">:</span>{' '}
+                    <span className="text-green-400">"30 min"</span>,
+                  </span>
                 </div>
 
-                {/* Subject Input */}
-                <div className="flex text-neutral-500 mb-2 group/line">
-                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none pt-1 group-hover/line:text-neutral-500 transition-colors">5</span>
-                  <div className="flex-1 flex flex-wrap items-center ml-4 sm:ml-8 gap-1">
-                    <span className="text-blue-300">subject</span><span className="text-white">:</span> <span className="text-green-400 ml-1 sm:ml-2">"</span>
-                    <input
-                      type="text"
-                      name="subject"
-                      value={form.subject}
-                      onChange={handleChange}
-                      className="bg-transparent border-b border-dashed border-white/20 focus:border-orange-500/60 focus:bg-white/5 focus:outline-none text-green-300 w-full max-w-[12rem] sm:max-w-md transition-all px-1 placeholder-green-400/20"
-                      placeholder="Project Inquiry"
-                      required
-                    />
-                    <span className="text-green-400">"</span><span className="text-white">,</span>
-                  </div>
+                {/* Line 5 */}
+                <div className="flex text-neutral-500 mb-2">
+                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">5</span>
+                  <span className="ml-4 sm:ml-8">
+                    <span className="text-blue-300">vibe</span>
+                    <span className="text-white">:</span>{' '}
+                    <span className="text-green-400">"casual &amp; relaxed"</span>,
+                  </span>
                 </div>
 
-                {/* Message Textarea */}
-                <div className="flex text-neutral-500 group/line">
-                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none pt-1 group-hover/line:text-neutral-500 transition-colors">6</span>
-                  <div className="flex-1 ml-4 sm:ml-8 pt-1 max-w-[calc(100%-3rem)]">
-                    <span className="text-blue-300">body</span><span className="text-white">:</span> <span className="text-green-400 ml-1 sm:ml-2">`</span>
-                    <div className="relative group/textarea mt-2 mb-2">
-                      <div className="absolute -left-3 sm:-left-4 top-0 bottom-0 w-0.5 bg-white/10 group-focus-within/textarea:bg-orange-500/50 transition-colors"></div>
-                      <textarea
-                        name="message"
-                        value={form.message}
-                        onChange={handleChange}
-                        className="w-full bg-black/20 focus:bg-[#0f111a] border border-white/5 focus:border-orange-500/30 rounded-lg focus:outline-none text-green-300 p-3 sm:p-4 min-h-[140px] resize-none transition-all placeholder-green-400/20 block font-mono-code leading-relaxed shadow-inner"
-                        placeholder="Hi there! I'd like to chat about..."
-                        required
-                      />
-                    </div>
-                    <span className="text-green-400">`</span>
-                  </div>
+                {/* Line 6 */}
+                <div className="flex text-neutral-500 mb-2">
+                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">6</span>
+                  <span className="ml-4 sm:ml-8 break-words">
+                    <span className="text-blue-300">topics</span>
+                    <span className="text-white">:</span>{' '}
+                    <span className="text-white">[</span>
+                    <span className="text-orange-400">"tech"</span>,{' '}
+                    <span className="text-orange-400">"startups"</span>,{' '}
+                    <span className="text-orange-400">"ideas"</span>
+                    <span className="text-white">]</span>,
+                  </span>
                 </div>
 
-                <div className="flex text-neutral-500 mb-8 group/line">
-                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none group-hover/line:text-neutral-500 transition-colors">7</span>
-                  <span className="break-words w-full"><span className="text-white">{'};'}</span></span>
+                {/* Line 7 */}
+                <div className="flex text-neutral-500 mb-8">
+                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">7</span>
+                  <span className="text-white">{'}'}</span>
                 </div>
 
-                <div className="flex text-neutral-500 mb-2 group/line">
-                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none group-hover/line:text-neutral-500 transition-colors">8</span>
-                  <span className="text-neutral-500 italic flex-1 break-words w-full min-w-0 pr-4">{'// Initialize secure connection & dispatch'}</span>
+                {/* Line 8 comment */}
+                <div className="flex text-neutral-500 mb-2">
+                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">8</span>
+                  <span className="text-neutral-500 italic">{'// Pick a time that works for you — no pressure'}</span>
                 </div>
 
-                <div className="flex text-neutral-500 mb-8 group/line items-start sm:items-center justify-between flex-col sm:flex-row gap-4">
-                  <div className="flex items-center min-w-0 pr-4 flex-wrap">
-                    <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none group-hover/line:text-neutral-500 transition-colors">9</span>
-                    <span className="break-words whitespace-pre-wrap flex-1"><span className="text-orange-400">await</span> <span className="text-blue-300">ContactSystem</span>.<span className="text-yellow-200">send</span><span className="text-white">(</span><span className="text-blue-400 break-all">messagePayload</span><span className="text-white">);</span></span>
+                {/* Line 9 — the action line + button */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-8">
+                  <div className="flex items-center min-w-0">
+                    <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">9</span>
+                    <span className="break-words">
+                      <span className="text-orange-400">await</span>{' '}
+                      <span className="text-blue-300">Calendar</span>
+                      <span className="text-white">.</span>
+                      <span className="text-yellow-200">schedule</span>
+                      <span className="text-white">(</span>
+                      <span className="text-blue-400">coffeeChat</span>
+                      <span className="text-white">);</span>
+                    </span>
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={status === 'sending' || status === 'sent'}
-                    className={`self-start sm:self-auto ml-12 sm:ml-4 px-6 py-2.5 rounded-lg font-sans text-sm font-bold tracking-wide transition-all duration-300 flex items-center justify-center gap-2 group/btn relative overflow-hidden flex-shrink-0 ${status === 'sent'
-                        ? 'bg-green-500/20 text-green-400 cursor-default border border-green-500/30 shadow-[0_0_20px_rgba(34,197,94,0.2)]'
-                        : status === 'sending'
-                          ? 'bg-orange-500/20 text-orange-400 cursor-not-allowed border border-orange-500/30'
-                          : 'bg-white/5 hover:bg-orange-500/10 text-white hover:text-orange-400 border border-white/10 hover:border-orange-500/50 shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(249,115,22,0.3)]'
-                      }`}
+                  <a
+                    href="https://calendly.com/shashankshaga-reddy/new-meeting"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-12 sm:ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-sans text-sm font-bold bg-orange-500/10 text-orange-400 border border-orange-500/40 hover:bg-orange-500/20 hover:border-orange-500/70 hover:shadow-[0_0_24px_rgba(249,115,22,0.35)] transition-all duration-300 flex-shrink-0 group/btn relative overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-orange-500/10 to-orange-500/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000"></div>
-                    {status === 'sending' ? (
-                      <>
-                        <svg className="w-4 h-4 animate-spin text-orange-500" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                        </svg>
-                        Executing...
-                      </>
-                    ) : status === 'sent' ? (
-                      <>
-                        <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Compiled & Sent
-                      </>
-                    ) : (
-                      <>
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                        Run Script
-                      </>
-                    )}
-                  </button>
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-orange-500/10 to-orange-500/0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000" />
+                    <span className="text-base">&#9749;</span>
+                    Schedule Coffee Chat
+                  </a>
                 </div>
 
-                {/* Simulated terminal logs at the bottom */}
-                <div className="flex text-neutral-500 group/line mt-8 border-t border-white/5 pt-4 bg-[#0a0a0f]/50 p-4 rounded-b-xl -my-4 sm:-my-6 md:-my-8 mx-[-1rem] sm:mx-[-1.5rem] md:mx-[-2rem] mt-4 px-8 sm:px-10 md:px-12 relative">
-                  <div className="absolute top-0 bottom-0 left-0 w-12 bg-transparent z-0"></div>
-                  <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none group-hover/line:text-neutral-500 transition-colors z-10">10</span>
-                  <div className="flex-1 font-mono-code text-xs md:text-sm z-10">
-                    <div className="flex items-center gap-2 text-neutral-500 mb-2">
-                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M4 15h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v6a2 2 0 002 2z" /></svg>
-                      Terminal output
+                {/* Terminal output — line 10 */}
+                <div className="border-t border-white/5 pt-4 bg-[#0a0a0f]/50 p-4 rounded-b-xl -mx-4 sm:-mx-6 md:-mx-8 mt-4 px-8 sm:px-10 md:px-12 relative">
+                  <div className="flex text-neutral-500">
+                    <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">10</span>
+                    <div className="flex-1 font-mono-code text-xs md:text-sm">
+                      <div className="flex items-center gap-2 text-neutral-500 mb-2">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M4 15h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                        </svg>
+                        Terminal output
+                      </div>
+                      <div className="text-green-400/70 animate-pulse">&gt; Ready to connect over coffee. Pick a time that works!</div>
                     </div>
-                    {status === 'idle' && <div className="text-neutral-500 animate-pulse">&gt; _</div>}
-                    {status === 'sending' && (
-                      <div className="text-yellow-400/80 leading-relaxed space-y-1">
-                        <div><span className="text-blue-400">[info]</span> Compiling message parameters...</div>
-                        <div className="opacity-75"><span className="text-blue-400">[info]</span> Establishing secure connection via wss://api.shashank.dev/send...</div>
-                        <div className="text-orange-400 animate-pulse"><span className="text-purple-400">[verbose]</span> Sending payload...</div>
-                      </div>
-                    )}
-                    {status === 'sent' && (
-                      <div className="text-green-400 leading-relaxed space-y-1">
-                        <div>&gt; Payload delivered successfully.</div>
-                        <div className="opacity-75 text-green-500/70 border-l-2 border-green-500/30 pl-2 ml-1 mt-1">Status: 200 OK</div>
-                        <div className="text-neutral-500 mt-2">&gt; Process exited with code 0.</div>
-                      </div>
-                    )}
                   </div>
                 </div>
-
-              </form>
+              </div>
             </div>
 
             {/* Right Panel: Info / Socials */}
@@ -277,14 +204,17 @@ export default function Contact() {
               <div>
                 <div className="flex items-center justify-between text-xs text-neutral-500 mb-6 uppercase tracking-widest border-b border-white/5 pb-3">
                   <span>Exports</span>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
                 </div>
 
                 <div className="space-y-6">
                   {contactInfo.map((item, i) => (
                     <div key={i} className="group">
                       <div className="text-xs text-neutral-600 mb-1.5 flex items-center gap-1.5">
-                        <span className="text-purple-400">export const</span> <span className="text-blue-400">{item.label.toLowerCase()}</span> =
+                        <span className="text-purple-400">export const</span>{' '}
+                        <span className="text-blue-400">{item.label.toLowerCase()}</span> =
                       </div>
                       <a
                         href={item.href}
@@ -299,18 +229,32 @@ export default function Contact() {
                     </div>
                   ))}
 
-                  <div className="pt-6 mt-6 border-t border-white/5">
+                  {/* Status */}
+                  <div className="pt-6 mt-2 border-t border-white/5">
                     <div className="text-xs text-neutral-600 mb-2">
-                      <span className="text-purple-400">export const</span> <span className="text-blue-400 mr-1">status</span> =
+                      <span className="text-purple-400">export const</span>{' '}
+                      <span className="text-blue-400 mr-1">status</span> =
                     </div>
                     <div className="flex items-center gap-2 text-sm text-yellow-200/90 bg-yellow-500/10 border border-yellow-500/20 p-2.5 rounded-lg w-max">
                       <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse shadow-[0_0_10px_rgba(234,179,8,0.5)]"></span>
                       "Available"
                     </div>
                   </div>
+
+                  {/* Coffee chat export */}
+                  <div className="pt-4">
+                    <div className="text-xs text-neutral-600 mb-1.5">
+                      <span className="text-purple-400">export const</span>{' '}
+                      <span className="text-blue-400">openTo</span> =
+                    </div>
+                    <div className="text-sm text-orange-400/80 bg-orange-500/5 border border-orange-500/15 p-2.5 rounded-lg">
+                      <span className="text-neutral-500">"</span>
+                      coffee chats &amp; collabs
+                      <span className="text-neutral-500">"</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
