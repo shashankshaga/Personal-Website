@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    cursor: none;
+  }
+
+  input, textarea, [contenteditable="true"] {
+    cursor: text !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #080808;
+    color: #e5e5e5;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #111;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #f97316;
+    border-radius: 9999px;
+  }
+
+  ::selection {
+    background: rgba(249, 115, 22, 0.3);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #fb923c, #f97316, #ea580c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-orange {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.4), 0 0 60px rgba(249, 115, 22, 0.15);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px rgba(249, 115, 22, 0.6);
+  }
+
+  .glass {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .section-fade {
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .font-mono-code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+}

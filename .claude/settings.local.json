@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"c:\\\\Users\\\\shash\\\\Desktop\\\\Personal website\\\\index.html\":*)",
+      "Bash(npm install)",
+      "Bash(npm run build)"
+    ]
+  }
+}
