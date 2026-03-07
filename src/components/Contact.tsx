@@ -85,10 +85,10 @@ export default function Contact() {
                 <div className="flex text-neutral-500 mb-6">
                   <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">1</span>
                   <span className="break-words">
-                    <span className="text-purple-400">import</span>{' '}
-                    {'{ '}<span className="text-blue-300">Calendar</span>{' }'}{' '}
-                    <span className="text-purple-400">from</span>{' '}
-                    <span className="text-green-400">'@shashank/meet'</span>;
+                    <span className="text-orange-500">import</span>{' '}
+                    {'{ '}<span className="text-orange-300">Calendar</span>{' }'}{' '}
+                    <span className="text-orange-500">from</span>{' '}
+                    <span className="text-amber-400">'@shashank/meet'</span>;
                   </span>
                 </div>
 
@@ -101,8 +101,8 @@ export default function Contact() {
                 <div className="flex text-neutral-500 mb-2">
                   <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">3</span>
                   <span>
-                    <span className="text-purple-400">const</span>{' '}
-                    <span className="text-blue-400">coffeeChat</span>{' '}
+                    <span className="text-orange-500">const</span>{' '}
+                    <span className="text-amber-300">coffeeChat</span>{' '}
                     <span className="text-white">=</span>{' '}
                     <span className="text-white">{'{'}</span>
                   </span>
@@ -112,9 +112,9 @@ export default function Contact() {
                 <div className="flex text-neutral-500 mb-2">
                   <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">4</span>
                   <span className="ml-4 sm:ml-8">
-                    <span className="text-blue-300">duration</span>
+                    <span className="text-orange-300">duration</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-green-400">"30 min"</span>,
+                    <span className="text-amber-400">"30 min"</span>,
                   </span>
                 </div>
 
@@ -122,9 +122,9 @@ export default function Contact() {
                 <div className="flex text-neutral-500 mb-2">
                   <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">5</span>
                   <span className="ml-4 sm:ml-8">
-                    <span className="text-blue-300">vibe</span>
+                    <span className="text-orange-300">vibe</span>
                     <span className="text-white">:</span>{' '}
-                    <span className="text-green-400">"casual &amp; relaxed"</span>,
+                    <span className="text-amber-400">"casual &amp; relaxed"</span>,
                   </span>
                 </div>
 
@@ -132,7 +132,7 @@ export default function Contact() {
                 <div className="flex text-neutral-500 mb-2">
                   <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">6</span>
                   <span className="ml-4 sm:ml-8 break-words">
-                    <span className="text-blue-300">topics</span>
+                    <span className="text-orange-300">topics</span>
                     <span className="text-white">:</span>{' '}
                     <span className="text-white">[</span>
                     <span className="text-orange-400">"tech"</span>,{' '}
@@ -151,7 +151,7 @@ export default function Contact() {
                 {/* Line 8 comment */}
                 <div className="flex text-neutral-500 mb-2">
                   <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">8</span>
-                  <span className="text-neutral-500 italic">{'// Pick a time that works for you — no pressure'}</span>
+                  <span className="text-orange-600/50 italic">{'// Pick a time that works for you — no pressure'}</span>
                 </div>
 
                 {/* Line 9 — the action line + button */}
@@ -160,11 +160,11 @@ export default function Contact() {
                     <span className="w-8 flex-shrink-0 text-right mr-4 sm:mr-6 text-neutral-700 select-none">9</span>
                     <span className="break-words">
                       <span className="text-orange-400">await</span>{' '}
-                      <span className="text-blue-300">Calendar</span>
+                      <span className="text-orange-300">Calendar</span>
                       <span className="text-white">.</span>
-                      <span className="text-yellow-200">schedule</span>
+                      <span className="text-orange-200">schedule</span>
                       <span className="text-white">(</span>
-                      <span className="text-blue-400">coffeeChat</span>
+                      <span className="text-amber-300">coffeeChat</span>
                       <span className="text-white">);</span>
                     </span>
                   </div>
@@ -192,7 +192,7 @@ export default function Contact() {
                         </svg>
                         Terminal output
                       </div>
-                      <div className="text-green-400/70 animate-pulse">&gt; Ready to connect over coffee. Pick a time that works!</div>
+                      <div className="text-amber-400/70 animate-pulse">&gt; Ready to connect over coffee. Pick a time that works!</div>
                     </div>
                   </div>
                 </div>
@@ -213,14 +213,14 @@ export default function Contact() {
                   {contactInfo.map((item, i) => (
                     <div key={i} className="group">
                       <div className="text-xs text-neutral-600 mb-1.5 flex items-center gap-1.5">
-                        <span className="text-purple-400">export const</span>{' '}
-                        <span className="text-blue-400">{item.label.toLowerCase()}</span> =
+                        <span className="text-orange-500">export const</span>{' '}
+                        <span className="text-amber-300">{item.label.toLowerCase()}</span> =
                       </div>
                       <a
                         href={item.href}
                         target={item.href.startsWith('http') ? '_blank' : undefined}
                         rel="noopener noreferrer"
-                        className="text-sm text-green-400/80 hover:text-green-300 flex items-center gap-2 transition-colors break-all bg-black/20 p-2.5 rounded-lg border border-white/5 hover:border-orange-500/30"
+                        className="text-sm text-amber-400/80 hover:text-orange-300 flex items-center gap-2 transition-colors break-all bg-black/20 p-2.5 rounded-lg border border-white/5 hover:border-orange-500/30"
                       >
                         <span className="text-neutral-500">"</span>
                         <span className="truncate">{item.value}</span>
@@ -232,10 +232,10 @@ export default function Contact() {
                   {/* Status */}
                   <div className="pt-6 mt-2 border-t border-white/5">
                     <div className="text-xs text-neutral-600 mb-2">
-                      <span className="text-purple-400">export const</span>{' '}
-                      <span className="text-blue-400 mr-1">status</span> =
+                      <span className="text-orange-500">export const</span>{' '}
+                      <span className="text-amber-300 mr-1">status</span> =
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-yellow-200/90 bg-yellow-500/10 border border-yellow-500/20 p-2.5 rounded-lg w-max">
+                    <div className="flex items-center gap-2 text-sm text-orange-200/90 bg-yellow-500/10 border border-yellow-500/20 p-2.5 rounded-lg w-max">
                       <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse shadow-[0_0_10px_rgba(234,179,8,0.5)]"></span>
                       "Available"
                     </div>
@@ -244,8 +244,8 @@ export default function Contact() {
                   {/* Coffee chat export */}
                   <div className="pt-4">
                     <div className="text-xs text-neutral-600 mb-1.5">
-                      <span className="text-purple-400">export const</span>{' '}
-                      <span className="text-blue-400">openTo</span> =
+                      <span className="text-orange-500">export const</span>{' '}
+                      <span className="text-amber-300">openTo</span> =
                     </div>
                     <div className="text-sm text-orange-400/80 bg-orange-500/5 border border-orange-500/15 p-2.5 rounded-lg">
                       <span className="text-neutral-500">"</span>

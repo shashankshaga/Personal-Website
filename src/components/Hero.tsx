@@ -91,7 +91,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div ref={floatRef} className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center transition-transform duration-75">
+      <div ref={floatRef} className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center transition-transform duration-75 pt-20 md:pt-0">
         {/* Available badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-green-500/20 mb-8">
           <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />

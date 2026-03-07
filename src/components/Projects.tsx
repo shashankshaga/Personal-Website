@@ -110,12 +110,15 @@ export default function Projects() {
           {visible.map((project, i) => (
             <div
               key={project.title}
-              className={`group relative p-6 rounded-2xl glass border border-white/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${accentMap[project.accentColor]} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              className={`group relative p-6 rounded-2xl glass border border-white/5 overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_8px_50px_rgba(249,115,22,0.22),0_0_0_1px_rgba(249,115,22,0.18)] ${accentMap[project.accentColor]} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
               style={{ transitionDelay: `${i * 80}ms` }}
             >
+              {/* Shine sweep on hover */}
+              <div className="absolute top-0 bottom-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-orange-300/[0.09] to-transparent -translate-x-full pointer-events-none group-hover:animate-[card-shine_0.65s_ease_forwards]" />
+
               {/* Accent gradient on hover */}
-              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${bgAccentMap[project.accentColor]} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              <div className={`absolute inset-0 bg-gradient-to-br ${bgAccentMap[project.accentColor]} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
               <div className="relative z-10">
                 {/* Header */}

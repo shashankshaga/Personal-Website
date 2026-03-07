@@ -23,24 +23,22 @@ const stats = [
   { value: 100, suffix: '%', label: 'Passion' },
 ]
 
-// Replace these src values with your actual photos
-const photos = [
-  { src: '/iamge11.jpg', alt: 'Photo 1', flex: 1.4 },
-  { src: '/iamge2.jpg', alt: 'Photo 2', flex: 0.8 },
-  { src: '/iamge3.jpg', alt: 'Photo 3', flex: 1.1 },
-  { src: '/iamge4.jpg', alt: 'Photo 4', flex: 0.7 },
-  { src: '/iamge5.jpg', alt: 'Photo 5', flex: 1.35 },
-  { src: '/iamge6.jpg', alt: 'Photo 6', flex: 0.85 },
-  { src: '/iamge6.jpg', alt: 'Photo 7', flex: 1.1 },
+// Replace src paths with your actual photos
+const codeGallery = [
+  { id: 'bhangra', label: 'bhangra_performance', src: '/iamge7.jpg', comment: '9+ years of dance' },
+  { id: 'chess', label: 'self_portrait', src: '/iamge2.jpg', comment: '1800+ rated player' },
+  { id: 'hackathon', label: 'university_of_florida', src: '/iamge3.jpg', comment: 'go Gators!' },
+  { id: 'uf', label: 'SwampHacks_hackathon', src: '/iamge4.jpg', comment: 'shipped in 36 hours!' },
+  { id: 'family', label: 'hacklytics_hackathon', src: '/iamge5.jpg', comment: 'GT Hackathon' },
+  { id: 'coding', label: 'first_robotics', src: '/iamge6.jpg', comment: 'midnight 26588' },
+  { id: 'travel', label: 'exploring_the_world', src: '/iamge11.jpg', comment: 'adventures' },
 ]
-
-const totalFlex = photos.reduce((s, p) => s + p.flex, 0)
 
 export default function About() {
   const { ref, isVisible } = useIntersectionObserver(0.15)
   const [visibleLines, setVisibleLines] = useState(0)
   const [counts, setCounts] = useState(stats.map(() => 0))
-  const [hoveredImg, setHoveredImg] = useState<number | null>(null)
+  const [hoveredLine, setHoveredLine] = useState<number | null>(null)
 
   useEffect(() => {
     if (!isVisible) return
@@ -152,55 +150,194 @@ export default function About() {
         </div>
       </div>
 
-      {/* Photo Collage — full width, breaks out of px-6 */}
-      {/* onMouseLeave on the container prevents flicker when moving between images */}
+      {/* Code Gallery — full width, styled like the contact editor */}
       <div
-        className={`-mx-6 overflow-hidden transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-        onMouseLeave={() => setHoveredImg(null)}
+        className={`-mx-6 overflow-hidden border-t border-white/5 bg-[#0a0a0f] transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+        onMouseLeave={() => setHoveredLine(null)}
       >
-        <div className="flex h-80">
-          {photos.map((photo, i) => {
-            const isHov = hoveredImg === i
-            const anyHov = hoveredImg !== null
-            // Width-based transitions are reliable across all browsers; flex animation is not
-            const baseW = `${(photo.flex / totalFlex * 100).toFixed(2)}%`
-            const width = anyHov ? (isHov ? '40%' : `${60 / (photos.length - 1)}%`) : baseW
-
-            return (
-              <div
-                key={i}
-                onMouseEnter={() => setHoveredImg(i)}
-                className="relative overflow-hidden flex-shrink-0"
-                style={{ width, transition: 'width 0.5s cubic-bezier(0.4,0,0.2,1)' }}
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  draggable={false}
-                  className="w-full h-full object-cover select-none"
-                  style={{
-                    transform: isHov ? 'scale(1.08)' : 'scale(1)',
-                    filter: anyHov && !isHov ? 'brightness(0.22) blur(1px)' : 'brightness(1)',
-                    transition: 'transform 0.5s ease, filter 0.4s ease',
-                  }}
-                />
-
-                {/* Permanent bottom vignette for depth */}
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/55 to-transparent pointer-events-none" />
-
-                {/* Hover: orange gradient + ring — single div, always mounted for smooth transition */}
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    opacity: isHov ? 1 : 0,
-                    transition: 'opacity 0.4s ease',
-                    background: 'linear-gradient(to top, rgba(249,115,22,0.28) 0%, transparent 55%)',
-                    boxShadow: 'inset 0 0 0 2px rgba(249,115,22,0.7), inset 0 0 60px rgba(249,115,22,0.18)',
-                  }}
-                />
+        {/* Gallery editor header */}
+        <div className="flex items-center justify-between px-4 py-3 bg-[#0f111a] border-b border-white/5">
+          <div className="flex items-center gap-4">
+            <div className="flex gap-1.5 pl-2">
+              <div className="w-3 h-3 rounded-full bg-red-500/80" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+            </div>
+            <div className="flex gap-1 bg-[#1a1d27] rounded-md p-1">
+              <div className="px-3 py-1 bg-[#282c34] rounded text-xs text-orange-400 font-mono-code flex items-center gap-2">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M4 4h16v16H4V4z" />
+                </svg>
+                gallery.ts
               </div>
-            )
-          })}
+            </div>
+          </div>
+          <div className="text-xs text-neutral-600 font-mono-code hidden sm:flex items-center gap-4">
+            <span>TypeScript</span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+              hover a line to preview
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row">
+          {/* Left: Code panel */}
+          <div className="flex-1 p-4 sm:p-6 font-mono-code text-sm border-b lg:border-b-0 lg:border-r border-white/5 bg-[#0d1117]/40 relative">
+            {/* Line gutter */}
+            <div className="absolute top-0 left-0 bottom-0 w-12 bg-[#0d1117] border-r border-white/5 z-0" />
+
+            <div className="relative z-10 space-y-0.5">
+              {/* Header lines */}
+              <div className="flex items-center py-0.5 px-1">
+                <span className="w-8 text-right mr-4 sm:mr-6 text-neutral-700 select-none flex-shrink-0">1</span>
+                <span>
+                  <span className="text-purple-400">import</span>{' '}
+                  <span className="text-neutral-500">{'{ '}</span>
+                  <span className="text-blue-300">Photo</span>
+                  <span className="text-neutral-500">{' }'}</span>{' '}
+                  <span className="text-purple-400">from</span>{' '}
+                  <span className="text-green-400">'@shashank/life'</span>
+                  <span className="text-neutral-600">;</span>
+                </span>
+              </div>
+
+              <div className="flex items-center py-0.5 px-1">
+                <span className="w-8 text-right mr-4 sm:mr-6 text-neutral-700 select-none flex-shrink-0">2</span>
+              </div>
+
+              <div className="flex items-center py-0.5 px-1">
+                <span className="w-8 text-right mr-4 sm:mr-6 text-neutral-700 select-none flex-shrink-0">3</span>
+                <span>
+                  <span className="text-purple-400">const</span>{' '}
+                  <span className="text-blue-400">gallery</span>
+                  <span className="text-neutral-500">: </span>
+                  <span className="text-blue-300">Photo</span>
+                  <span className="text-neutral-500">[] = [</span>
+                </span>
+              </div>
+
+              {/* Hoverable photo lines */}
+              {codeGallery.map((item, i) => (
+                <div
+                  key={item.id}
+                  onMouseEnter={() => setHoveredLine(i)}
+                  className={`flex items-center py-1 px-1 cursor-default select-none transition-colors duration-150 rounded-sm ${hoveredLine === i ? 'bg-orange-500/10' : 'hover:bg-white/[0.025]'
+                    }`}
+                >
+                  <span
+                    className={`w-8 text-right mr-4 sm:mr-6 select-none flex-shrink-0 transition-colors duration-150 ${hoveredLine === i ? 'text-orange-500/60' : 'text-neutral-700'
+                      }`}
+                  >
+                    {i + 4}
+                  </span>
+
+                  <span className="text-neutral-600 flex-shrink-0 mr-1">{'{ '}</span>
+
+                  <span className={`flex-shrink-0 transition-colors duration-150 ${hoveredLine === i ? 'text-blue-300' : 'text-blue-300/60'}`}>
+                    id
+                  </span>
+                  <span className="text-neutral-600 flex-shrink-0">:</span>
+
+                  <span className={`mx-1.5 transition-colors duration-150 truncate ${hoveredLine === i ? 'text-orange-400' : 'text-orange-400/50'}`}>
+                    &ldquo;{item.label}&rdquo;,
+                  </span>
+
+                  <span className={`flex-shrink-0 hidden sm:inline transition-colors duration-150 ${hoveredLine === i ? 'text-blue-300' : 'text-blue-300/60'}`}>
+                    src
+                  </span>
+                  <span className="text-neutral-600 flex-shrink-0 hidden sm:inline">:</span>
+                  <span className={`mx-1.5 hidden sm:inline transition-colors duration-150 ${hoveredLine === i ? 'text-green-400' : 'text-green-400/40'}`}>
+                    &ldquo;{item.src}&rdquo;
+                  </span>
+
+                  <span className="text-neutral-600 flex-shrink-0 mr-2 hidden sm:inline">{'}'}</span>
+
+                  <span className={`italic hidden md:inline transition-colors duration-150 whitespace-nowrap ${hoveredLine === i ? 'text-neutral-500' : 'text-neutral-700'}`}>
+                    {'// '}{item.comment}
+                  </span>
+                </div>
+              ))}
+
+              {/* Closing lines */}
+              <div className="flex items-center py-0.5 px-1">
+                <span className="w-8 text-right mr-4 sm:mr-6 text-neutral-700 select-none flex-shrink-0">
+                  {codeGallery.length + 4}
+                </span>
+                <span className="text-neutral-500">]</span>
+              </div>
+
+              <div className="flex items-center py-0.5 px-1">
+                <span className="w-8 text-right mr-4 sm:mr-6 text-neutral-700 select-none flex-shrink-0">
+                  {codeGallery.length + 5}
+                </span>
+              </div>
+
+              <div className="flex items-center py-0.5 px-1">
+                <span className="w-8 text-right mr-4 sm:mr-6 text-neutral-700 select-none flex-shrink-0">
+                  {codeGallery.length + 6}
+                </span>
+                <span>
+                  <span className="text-purple-400">export default</span>{' '}
+                  <span className="text-blue-400">gallery</span>
+                  <span className="text-neutral-600">;</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Photo preview */}
+          <div className="h-64 lg:h-auto lg:w-[44%] xl:w-[40%] relative bg-[#080808] overflow-hidden flex-shrink-0">
+            {/* Default placeholder */}
+            <div
+              className="absolute inset-0 flex items-center justify-center flex-col gap-3 pointer-events-none"
+              style={{ opacity: hoveredLine === null ? 1 : 0, transition: 'opacity 0.35s ease' }}
+            >
+              <svg className="w-10 h-10 text-neutral-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p className="text-neutral-700 font-mono-code text-xs">// hover a line to preview</p>
+            </div>
+
+            {/* Photo crossfade stack — all images mounted, opacity-switched */}
+            {codeGallery.map((item, i) => (
+              <img
+                key={item.id}
+                src={item.src}
+                alt={item.label}
+                draggable={false}
+                className="absolute inset-0 w-full h-full object-cover select-none"
+                style={{
+                  opacity: hoveredLine === i ? 1 : 0,
+                  transform: hoveredLine === i ? 'scale(1.04)' : 'scale(1)',
+                  transition: 'opacity 0.4s ease, transform 0.5s ease',
+                }}
+              />
+            ))}
+
+            {/* Orange bottom gradient on active */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                opacity: hoveredLine !== null ? 1 : 0,
+                transition: 'opacity 0.4s ease',
+                background: 'linear-gradient(to top, rgba(249,115,22,0.35) 0%, transparent 55%)',
+              }}
+            />
+
+            {/* Caption badge */}
+            <div
+              className="absolute bottom-4 left-4 pointer-events-none"
+              style={{ opacity: hoveredLine !== null ? 1 : 0, transition: 'opacity 0.3s ease' }}
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-black/65 backdrop-blur-sm rounded-lg border border-white/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse flex-shrink-0" />
+                <span className="text-xs font-mono-code text-orange-300/90">
+                  {hoveredLine !== null ? codeGallery[hoveredLine].comment : ''}
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
