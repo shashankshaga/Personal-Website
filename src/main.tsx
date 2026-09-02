@@ -1,13 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-declare module '*.css' {}
-
-import './style.css'
+// @ts-expect-error: Vite loads CSS side-effect imports at runtime.
+import './index.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 )
