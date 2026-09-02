@@ -142,7 +142,7 @@ export default function Hero() {
             Let's Meet
           </a>
           <a
-            href="/resume.pdf"
+            href="/Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-6 py-3.5 border border-white/10 hover:border-white/20 text-neutral-400 hover:text-white font-semibold rounded-xl transition-all duration-300 hover:bg-white/5 hover:-translate-y-1"
